@@ -15,8 +15,8 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 
 //keypress on search box
-document.getElementById('search').addEventListener('keypress',function(event){
-  if(event.key == 'Enter'){
+document.getElementById('search').addEventListener('keypress', function (event) {
+  if (event.key == 'Enter') {
     document.getElementById('search-btn').click();
   }
 })
@@ -46,18 +46,40 @@ const getImages = (query) => {
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
 }
-
+let imageSelected = 0;
 let slideIndex = 0;
+
 const selectItem = (event, img) => {
   let element = event.target;
   let item = sliders.indexOf(img);
   if (item === -1) {
     element.classList.add('added');
     sliders.push(img);
-  }else{
+    imageSelected++;
+    noOfSelectedImages(sliders);
+  } else {
     element.classList.remove('added');
+    imageSelected--;
+
+    for (var i = 0; i < sliders.length; i++) {
+      if (sliders[i] === img) {
+        sliders.splice(i, 1);
+      }
+    }
+    noOfSelectedImages(sliders);
+
   }
 }
+
+//show number of selected images
+const noOfSelectedImages = (sliders) => {
+  let p = document.getElementById('image-selected');
+  p.className = 'container-fluid font-weight-bold text-uppercase text-white text-center bg-success p-2 m-3';
+  p.innerHTML = `${sliders.length} Image Selected`;
+  galleryHeader.appendChild(p);
+  console.log(sliders.length)
+}
+
 var timer;
 const createSlider = () => {
   // check slider image length
@@ -76,7 +98,7 @@ const createSlider = () => {
 
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
-  // hide image aria
+  // hide image area
   imagesArea.style.display = 'none';
   let duration = document.getElementById('duration').value || 1000;
 
@@ -94,6 +116,7 @@ const createSlider = () => {
     })
   } else {
     let item = document.createElement('div')
+    item.className= 'bg-danger text-white p-2 text-center';
     item.innerHTML = `Duration Must be greater than zero`;
     sliderContainer.appendChild(item)
   }
