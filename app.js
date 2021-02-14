@@ -36,6 +36,10 @@ const showImages = (images) => {
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
+    let p = document.getElementById('image-selected');
+    p.className = 'container-fluid font-weight-bold text-uppercase text-white text-center bg-success p-2 m-3';
+    p.innerHTML= `${sliders.length} Image Selected`;
+    galleryHeader.appendChild(p);
   })
 
 }
@@ -74,7 +78,6 @@ const selectItem = (event, img) => {
 //show number of selected images
 const noOfSelectedImages = (sliders) => {
   let p = document.getElementById('image-selected');
-  p.className = 'container-fluid font-weight-bold text-uppercase text-white text-center bg-success p-2 m-3';
   p.innerHTML = `${sliders.length} Image Selected`;
   galleryHeader.appendChild(p);
   
