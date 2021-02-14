@@ -27,6 +27,10 @@ const showImages = (images) => {
   gallery.innerHTML = '';
   // show gallery title
   galleryHeader.style.display = 'flex';
+  let p = document.createElement('p');
+  p.className = 'container-fluid font-weight-bold text-uppercase text-white text-center bg-success p-2 m-3';
+  p.innerHTML = `Found ${images.length} Images`;
+  gallery.appendChild(p);
   images.forEach(image => {
     let div = document.createElement('div');
     div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
@@ -46,13 +50,12 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
-  element.classList.add('added');
-
   let item = sliders.indexOf(img);
   if (item === -1) {
+    element.classList.add('added');
     sliders.push(img);
-  } else {
-    alert('Hey, Already added !')
+  }else{
+    element.classList.remove('added');
   }
 }
 var timer;
