@@ -77,7 +77,7 @@ const noOfSelectedImages = (sliders) => {
   p.className = 'container-fluid font-weight-bold text-uppercase text-white text-center bg-success p-2 m-3';
   p.innerHTML = `${sliders.length} Image Selected`;
   galleryHeader.appendChild(p);
-  console.log(sliders.length)
+  
 }
 
 var timer;
